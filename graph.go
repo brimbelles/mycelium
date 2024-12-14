@@ -42,16 +42,16 @@ func BooleanProperty(key string, value bool) Property {
 
 type Node struct {
 	Label      string
-	Properties []Property
+	Properties map[Property]bool
 }
 
 type Relationship struct {
 	From       *Node
 	To         *Node
-	Properties []Property
+	Properties map[Property]bool
 }
 
-func NewRelationship(from, to *Node, properties []Property) (Relationship, error) {
+func NewRelationship(from, to *Node, properties map[Property]bool) (Relationship, error) {
 	rel := Relationship{from, to, properties}
 	if from == nil {
 		return rel, errors.New("Origin node is nil")
@@ -63,15 +63,15 @@ func NewRelationship(from, to *Node, properties []Property) (Relationship, error
 }
 
 type Graph struct {
-	nodes         []Node
-	relationships []Relationship
+	nodes         map[*Node]bool
+	relationships map[*Relationship]bool
 }
 
-func LabeledNodes(g *Graph, label string) []Node {
-	var nodes []Node
-	for _, node := range g.nodes {
+func HasLabel(graph Graph, label string) map[*Node]bool {
+	nodes := make(map[*Node]bool)
+	for node, exists := range graph.nodes {
 		if node.Label == label {
-			nodes = append(nodes, node)
+			nodes[node] = exists
 		}
 	}
 	return nodes
