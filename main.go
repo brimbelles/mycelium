@@ -19,4 +19,7 @@ func main() {
 	g1 := Graph{[]Node{n1, n2}, []Relationship{r12}}
 
 	fmt.Println(g1)
+
+	s1 := LabeledNodes(&g1, "n2")
+	fmt.Println(s1)
 }

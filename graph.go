@@ -66,3 +66,13 @@ type Graph struct {
 	nodes         []Node
 	relationships []Relationship
 }
+
+func LabeledNodes(g *Graph, label string) []Node {
+	var nodes []Node
+	for _, node := range g.nodes {
+		if node.Label == label {
+			nodes = append(nodes, node)
+		}
+	}
+	return nodes
+}
