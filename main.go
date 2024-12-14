@@ -11,7 +11,10 @@ func main() {
 	p2 := IntegerProperty("p2-key", 2)
 	p3 := DoubleProperty("p3-key", 3.0)
 	p4 := BooleanProperty("p4-key", true)
-	r12 := Relationship{n1, n2, []Property{p1, p2, p3, p4}}
+	r12, err := NewRelationship(&n1, &n2, []Property{p1, p2, p3, p4})
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	g1 := Graph{[]Node{n1, n2}, []Relationship{r12}}
 

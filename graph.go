@@ -1,5 +1,7 @@
 package main
 
+import "errors"
+
 type propertyType uint
 
 const (
@@ -44,9 +46,20 @@ type Node struct {
 }
 
 type Relationship struct {
-	From       Node
-	To         Node
+	From       *Node
+	To         *Node
 	Properties []Property
+}
+
+func NewRelationship(from, to *Node, properties []Property) (Relationship, error) {
+	rel := Relationship{from, to, properties}
+	if from == nil {
+		return rel, errors.New("Origin node is nil")
+	}
+	if to == nil {
+		return rel, errors.New("Destination node is nil")
+	}
+	return rel, nil
 }
 
 type Graph struct {
