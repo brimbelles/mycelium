@@ -48,3 +48,8 @@ type Relationship struct {
 	To         Node
 	Properties []Property
 }
+
+type Graph struct {
+	nodes         []Node
+	relationships []Relationship
+}

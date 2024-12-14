@@ -13,5 +13,7 @@ func main() {
 	p4 := BooleanProperty("p4-key", true)
 	r12 := Relationship{n1, n2, []Property{p1, p2, p3, p4}}
 
-	fmt.Println(r12)
+	g1 := Graph{[]Node{n1, n2}, []Relationship{r12}}
+
+	fmt.Println(g1)
 }
